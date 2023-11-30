@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using LiteLoaderFixerR.Utils;
+using PeNet;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Windows;
@@ -33,7 +35,7 @@ namespace LiteLoaderFixerR
             QQVersion.Text = version.FileVersion;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void BrowseQQ_Click(object sender, RoutedEventArgs e)
         {
             var select_qq_dialog = new Microsoft.Win32.OpenFileDialog()
             {
@@ -44,6 +46,61 @@ namespace LiteLoaderFixerR
             if (result == true)
             {
                 QQPath.Text = System.IO.Path.GetDirectoryName(select_qq_dialog.FileName);
+            }
+        }
+
+        private void FixQQ_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ElectronPath_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var qq_exe_path = System.IO.Path.Combine(QQPath.Text, "QQ.exe");
+            var code = new FunctionEngine(new PeFile(ElectronPath.Text));
+            var qq = new FunctionEngine(new PeFile(qq_exe_path));
+
+            var signatures = code.GetFunctionSignature("CompileFunctionInternal", 115);
+
+            if (signatures == null)
+            {
+                Status.Content = "未就绪：无法找到关键函数";
+                FixQQ.IsEnabled = false;
+                return;
+            }
+
+            foreach (var signature in signatures)
+            {
+                var rvas = qq.GetFunctionRva(signature.Signature);
+
+                if (rvas == null)
+                {
+                    continue;
+                }
+
+                if (rvas.Count == 1)
+                {
+                    Status.Content = "就绪";
+                    FixQQ.IsEnabled = true;
+                    return;
+                }
+            }
+
+            Status.Content = "未就绪：无法匹配关键函数";
+            FixQQ.IsEnabled = false;
+        }
+
+        private void BrowseElectron_Click(object sender, RoutedEventArgs e)
+        {
+            var select_electron_dialog = new Microsoft.Win32.OpenFileDialog()
+            {
+                Filter = "Electron 程序|*.exe"
+            };
+
+            var result = select_electron_dialog.ShowDialog();
+            if (result == true)
+            {
+                ElectronPath.Text = select_electron_dialog.FileName;
             }
         }
     }

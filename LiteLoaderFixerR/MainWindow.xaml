@@ -8,10 +8,15 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Label Content="QQ 路径：" HorizontalAlignment="Left" Margin="70,60,0,0" VerticalAlignment="Top" FontSize="20" />
-        <TextBox x:Name="QQPath" HorizontalAlignment="Left" Margin="195,60,0,0" VerticalAlignment="Top" Width="425" Height="35" FontSize="20" Text="" TextWrapping="Wrap" TextChanged="QQPath_TextChanged" />
-        <Button Content="浏览" HorizontalAlignment="Left" Margin="680,60,0,0" VerticalAlignment="Top" Height="35" Width="65" FontSize="18" Click="Button_Click" />
+        <TextBox x:Name="QQPath" HorizontalAlignment="Left" Margin="195,60,0,0" VerticalAlignment="Top" Width="425" Height="35" Text="" TextWrapping="Wrap" VerticalContentAlignment="Center" TextChanged="QQPath_TextChanged" />
+        <Button x:Name="BrowseQQ" Content="浏览" HorizontalAlignment="Left" Margin="680,60,0,0" VerticalAlignment="Top" Height="35" Width="65" FontSize="18" Click="BrowseQQ_Click" />
         <Label Content="QQ 版本：" HorizontalAlignment="Left" Margin="70,125,0,0" VerticalAlignment="Top" FontSize="20" />
-        <TextBox x:Name="QQVersion" HorizontalAlignment="Left" Margin="195,125,0,0" VerticalAlignment="Top" Width="425" Height="35" FontSize="20" Text="" TextWrapping="Wrap" IsReadOnly="True" />
-        <Button x:Name="FixQQ" Content="修复QQ" HorizontalAlignment="Left" Margin="570,320,0,0" VerticalAlignment="Top" Height="65" Width="175" FontSize="24" />
+        <TextBox x:Name="QQVersion" HorizontalAlignment="Left" Margin="195,125,0,0" VerticalAlignment="Top" Width="425" Height="35" VerticalContentAlignment="Center" Text="" TextWrapping="Wrap" IsReadOnly="True" />
+        <Button x:Name="FixQQ" Content="修复QQ" HorizontalAlignment="Left" Margin="570,320,0,0" VerticalAlignment="Top" Height="65" Width="175" FontSize="24" Click="FixQQ_Click" IsEnabled="False" />
+        <Label Content="Electron 路径：" HorizontalAlignment="Left" Margin="70,193,0,0" VerticalAlignment="Top" FontSize="20" />
+        <TextBox x:Name="ElectronPath" HorizontalAlignment="Left" Margin="224,193,0,0" VerticalAlignment="Top" Width="396" Height="35" VerticalContentAlignment="Center" Text="" TextWrapping="Wrap" TextChanged="ElectronPath_TextChanged" />
+        <Button x:Name="BrowseElectron" Content="浏览" HorizontalAlignment="Left" Margin="680,193,0,0" VerticalAlignment="Top" Height="35" Width="65" FontSize="18" Click="BrowseElectron_Click" />
+        <Label x:Name="Status" Content="未就绪" HorizontalAlignment="Left" Margin="147,324,0,0" VerticalAlignment="Top" FontSize="16" RenderTransformOrigin="0.483,1.575" />
+        <Label Content="状态：" HorizontalAlignment="Left" Margin="84,324,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.717,-0.089" FontSize="16" />
     </Grid>
 </Window>
